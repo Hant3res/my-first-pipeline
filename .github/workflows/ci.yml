@@ -22,18 +22,14 @@ jobs:
       with:
         dotnet-version: '8.x'
     
-    # Шаг 3: Восстанавливаем зависимости для основного проекта
-    - name: 💡 Восстанавливаем пакеты для Calculator
-      run: dotnet restore Calculator/Calculator.csproj
+    # Шаг 3: Восстанавливаем зависимости
+    - name: 💡 Восстанавливаем пакеты
+      run: dotnet restore
     
-    # Шаг 4: Восстанавливаем зависимости для тестового проекта  
-    - name: 💡 Восстанавливаем пакеты для тестов
-      run: dotnet restore Calculator.Tests/Calculator.Tests.csproj
+    # Шаг 4: Собираем проект
+    - name: 💡 Собираем проект
+      run: dotnet build --configuration Release
     
-    # Шаг 5: Собираем основной проект
-    - name: 💡 Собираем Calculator
-      run: dotnet build Calculator/Calculator.csproj --no-restore --configuration Release
-    
-    # Шаг 6: Запускаем тесты
+    # Шаг 5: Запускаем тесты
     - name: 💡 Запускаем тесты
-      run: dotnet test Calculator.Tests/Calculator.Tests.csproj --no-build --verbosity normal
+      run: dotnet test --configuration Release --verbosity normal
